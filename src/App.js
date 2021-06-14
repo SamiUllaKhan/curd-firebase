@@ -1,24 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import 'antd/dist/antd.css';
+import { Row, Col, Card, PageHeader } from 'antd';
+import Contacts from './components/Contacts';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <PageHeader
+      className="site-page-header"
+      title="CURD Operation"/>
+      <Row>
+        <Col span={12} offset={6}>
+          <Card style={{marginTop: 16 }} >
+          <Contacts/>
+          </Card>
+        </Col>
+      </Row>
+    </>
   );
 }
 
