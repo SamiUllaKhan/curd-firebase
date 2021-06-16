@@ -1,9 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { Form, Input, Button } from 'antd';
 
-  const layout = {
-    wrapperCol: { span: 24 },
-  };
+
 
   const tailLayout = {
     wrapperCol: {span: 24 },
@@ -23,44 +21,40 @@ const ContactFrom = (props) => {
 
     var [values, setValues] = useState(initialiFieldForm);
 
-   const handleInputChnage = e => {
+   const handleInputChnage = e => { // OnChnage Input setting values in values varable
         var { name, value } = e.target
         setValues({
             ...values,
             [name]: value 
         });
-        console.log([name] +" "+ value );
    }
 
-   const handleFromSubmit = e => {
+   const handleFromSubmit = e => { //OnClick Function this will trigger on submit button calling parentFunction in Contacts => addOrEdit
        e.preventDefault()
-      // props.addOrEdit(values);
-
-       console.log(values);
+        props.addOrEdit(values);
    }
-
-    
+   
     return ( 
       <Form>
         <Form.Item
           name="fullName"
           rules={[{ required: true, message: 'Please input your Full Name!' }]}
         >
-          <Input placeholder="Full Name" value={values.fullName} onChange={handleInputChnage} />
+          <Input name="fullName" placeholder="Full Name" value={values.fullName} onChange={handleInputChnage} />
         </Form.Item>
         
         <Form.Item
           name="mobile"
           rules={[{ required: true, message: 'Please input your Mobile!' }]}
         >
-          <Input placeholder="Mobile" value={values.mobile}  onChange={handleInputChnage} />
+          <Input name="mobile" placeholder="Mobile" value={values.mobile}  onChange={handleInputChnage} />
         </Form.Item>
         
         <Form.Item
           name="email"
           rules={[{ required: true, message: 'Please input your Email!' }]}
         >
-          <Input placeholder="Eamil" value={values.email}  onChange={handleInputChnage} />
+          <Input name="email" placeholder="Eamil" value={values.email}  onChange={handleInputChnage} />
         </Form.Item>
 
         
@@ -68,12 +62,12 @@ const ContactFrom = (props) => {
           name="address"
           rules={[{ required: true, message: 'Please input your Address!' }]}
         >
-          <TextArea rows={2}  placeholder="Address" value={values.address}  onChange={handleInputChnage} />
+          <TextArea name="address" rows={2}  placeholder="Address" value={values.address}  onChange={handleInputChnage} />
         </Form.Item>
         
 
         <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit" onChange={handleFromSubmit}>
+          <Button type="primary" htmlType="submit" onClick={handleFromSubmit}>
             Submit
           </Button>
         </Form.Item>

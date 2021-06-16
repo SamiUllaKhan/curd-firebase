@@ -1,23 +1,20 @@
 import React from 'react';
 import { List, Avatar } from 'antd';
 import ContactFrom from './ContactFrom';
-// import firebaseDB from '../firebase';
+import firebase from '../firebase';
+
+const db = firebase.database();
 
 const Contacts = () => {
-    const addOREdit = obj => {
+    const addOrEdit = obj => {
         console.log(obj);
-        // firebaseDB.child('conatacts').push(
-        //     obj, 
-        //         err => {
-        //             if(err)
-        //                 console.log(err)
-        //             }
-        //     )
+        const contactsRef = db.ref('contacts');
+        const newContantsRef = contactsRef.push();
+        newContantsRef.set(obj);
     }
     return ( 
         <>
-            <ContactFrom addOREdit={addOREdit } />
-            
+            <ContactFrom addOrEdit={addOrEdit} />
             <List.Item>
                 <List.Item.Meta
                 avatar={
@@ -27,7 +24,6 @@ const Contacts = () => {
                 description="Progresser XTech"
                 />
             </List.Item>
-            
         </>
      );
 }
