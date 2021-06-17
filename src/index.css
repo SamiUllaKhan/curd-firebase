@@ -14,5 +14,7 @@ code {
 }
 
 .ant-card-bordered {
-  border: 1px solid #dcdbdb;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 3px 3px 0 rgb(0 0 0 / 5%), 0 0px 3px 0 rgb(0 0 0 / 5%);
 }
+

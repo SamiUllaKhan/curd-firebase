@@ -12,6 +12,7 @@ const Contacts = () => {
     var loading = false;
     
     var [contactObjects, setContactObjects] = useState({});
+    var [currentId, setCurrentId] = useState('');
 
     useEffect(() => {
         db.ref('contacts').on('value', snapshot => {
@@ -32,17 +33,17 @@ const Contacts = () => {
     return ( 
         <>
             <Col span={8} style={{padding: 5}}>
-                <ContactFrom addOrEdit={addOrEdit} />
+                <ContactFrom {...({addOrEdit,currentId, contactObjects})}/>
             </Col>
             <Col span={16}>
                 <Row>
                     {
                         Object.keys(contactObjects).map(id => {
-                            return <Col key={id} span={6}  style={{padding: 2, height: 200}}>
+                            return <Col key={id} span={6}  style={{padding: 2}}>
                                 <Card
                                     actions={[
+                                        <EditOutlined key="edit" onClick={() =>{setCurrentId(id)}} />,
                                         <SettingOutlined key="setting" />,
-                                        <EditOutlined key="edit" />,
                                         <EllipsisOutlined key="ellipsis" />,
                                     ]}
                                     loading={loading}>
