@@ -67,7 +67,7 @@ const ContactFrom = (props) => {
         
 
         <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit" onClick={handleFromSubmit}>
+          <Button type="primary" shape="round" htmlType="submit" onClick={handleFromSubmit}>
             Submit
           </Button>
         </Form.Item>
