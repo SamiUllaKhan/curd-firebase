@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Form, Input, Button } from 'antd';
-
-
+import { Modal, Form, Input, Button } from 'antd';
 
   const tailLayout = {
     wrapperCol: {span: 24 },
@@ -11,7 +9,6 @@ import { Form, Input, Button } from 'antd';
    
 
 const ContactFrom = (props) => {
-
     const initialiFieldForm = {
         fullName: '',
         mobile: '',
@@ -20,13 +17,31 @@ const ContactFrom = (props) => {
     }
 
     var [values, setValues] = useState(initialiFieldForm);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const handleOk = () => {
+      setIsModalVisible(false);
+    };
+  
+    const handleCancel = () => {
+      setIsModalVisible(false);
+    };
+    
 
     useEffect(() => {
-      if(props.currentId === ''){
+      console.log(props);
+      // setIsModalVisible(true);
+      if(props.currentId === '0'){
+        setIsModalVisible(true);
+        setValues({
+          ...initialiFieldForm
+        })
+      } else if(props.currentId === ''){
         setValues({
           ...initialiFieldForm
         })
       } else {
+        setIsModalVisible(true);
         setValues({
           ...props.contactObjects[props.currentId]
         })
@@ -47,27 +62,35 @@ const ContactFrom = (props) => {
    }
    
     return ( 
-      <Form>
-      
-        <Input name="fullName" placeholder="Full Name" value={values.fullName} onChange={handleInputChnage} />
-        <br />
-    <br />
-        <Input name="mobile" placeholder="Mobile" value={values.mobile}  onChange={handleInputChnage} />
-        <br />
-    <br />
-        <Input name="email" placeholder="Eamil" value={values.email}  onChange={handleInputChnage} />
-        <br />
-    <br />
-        <TextArea name="address" rows={2}  placeholder="Address" value={values.address}  onChange={handleInputChnage} />
-        <br />
-    <br />
-        <Form.Item {...tailLayout}>
-          <Button type="primary" shape="round" htmlType="submit" onClick={handleFromSubmit}>
-            {props.currentId === '' ? "Save":"Update"}
-          </Button>
-        </Form.Item>
-      
-      </Form>
+      <>
+        {/* <Tooltip title="Add New">
+          <Button type="primary" shape="circle" icon={<PlusOutlined />} size="large" onClick={showModal} />
+        </Tooltip> */}
+        <Modal
+        title={props.currentId === 0 ? "Add New Contact": "Update Contact"}
+        visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <Form>
+          <Input name="fullName" placeholder="Full Name" value={values.fullName} onChange={handleInputChnage} />
+          <br />
+      <br />
+          <Input name="mobile" placeholder="Mobile" value={values.mobile}  onChange={handleInputChnage} />
+          <br />
+      <br />
+          <Input name="email" placeholder="Eamil" value={values.email}  onChange={handleInputChnage} />
+          <br />
+      <br />
+          <TextArea name="address" rows={4}  placeholder="Address" value={values.address}  onChange={handleInputChnage} />
+          <br />
+      <br />
+          <Form.Item {...tailLayout}>
+            <Button type="primary" shape="round" htmlType="submit" onClick={handleFromSubmit}>
+              {props.currentId === '' ? "Save":"Update"}
+            </Button>
+          </Form.Item>
+        
+        </Form>
+      </Modal>
+      </>
      );
 }
  

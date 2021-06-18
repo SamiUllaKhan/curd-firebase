@@ -1,9 +1,9 @@
 import './App.css';
 import 'antd/dist/antd.css';
-import { Layout, Row, Col, Card, notification } from 'antd';
+import { Layout, Menu, Button, Tooltip, Row, notification } from 'antd';
 import Contacts from './components/Contacts';
-import {SmileOutlined} from '@ant-design/icons';
-import {useEffect} from 'react';
+import { SmileOutlined, PlusOutlined } from '@ant-design/icons';
+import { useState, useEffect } from 'react';
 
 const { Header, Content, Footer } = Layout;
 
@@ -17,18 +17,25 @@ const openNotification = () => {
 };
 
 function App() {
-  useEffect(()=>{
-    openNotification();
-    // do stuff here...
-}, []) // <-- empty dependency array
+
+      useEffect(()=>{
+        openNotification();
+        // do stuff here...
+    }, []) // <-- empty dependency array
+
   return (
     <>
-      <Layout className="layout">
-        <Content style={{ padding: 20, margin: 30, backgroundColor: '#fff' }}>
-          <Row>
-              <Contacts/>
-          </Row>
-        </Content>
+    <Layout>
+        <Header className="header" style={{background: "#fff"}}>
+          <div className="logo" />
+          <Menu theme="light" mode="horizontal" defaultSelectedKeys={['2']}>
+            <Menu.Item key="1">nav 1</Menu.Item>
+            <Menu.Item key="2">nav 2</Menu.Item>
+            <Menu.Item key="3">nav 3</Menu.Item>
+          </Menu>
+        </Header>
+        <Contacts/>
+        <Footer style={{textAlign: "center", color: "rgb(124 124 124 / 85%)"}}>©2021 Created By Sami</Footer>
       </Layout>
     </>
   );
