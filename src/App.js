@@ -1,9 +1,9 @@
 import './App.css';
 import 'antd/dist/antd.css';
-import { Layout, Menu, Button, Tooltip, Row, notification } from 'antd';
+import { Layout, Menu, notification } from 'antd';
 import Contacts from './components/Contacts';
-import { SmileOutlined, PlusOutlined } from '@ant-design/icons';
-import { useState, useEffect } from 'react';
+import { SmileOutlined } from '@ant-design/icons';
+import { useEffect } from 'react';
 
 const { Header, Content, Footer } = Layout;
 
@@ -19,7 +19,7 @@ const openNotification = () => {
 function App() {
 
       useEffect(()=>{
-        openNotification();
+        // openNotification();
         // do stuff here...
     }, []) // <-- empty dependency array
 

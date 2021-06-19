@@ -27,26 +27,19 @@ const ContactFrom = (props) => {
       setIsModalVisible(false);
     };
     
-
     useEffect(() => {
-      console.log(props);
-      // setIsModalVisible(true);
-      if(props.currentId === '0'){
-        setIsModalVisible(true);
-        setValues({
-          ...initialiFieldForm
-        })
-      } else if(props.currentId === ''){
+      setIsModalVisible(false);
+      setIsModalVisible(props.visible);
+      if(props.currentId === ''){
         setValues({
           ...initialiFieldForm
         })
       } else {
-        setIsModalVisible(true);
         setValues({
           ...props.contactObjects[props.currentId]
         })
       }
-    }, [props.currentId, props.contactObjects])
+    }, [props.currentId, props.contactObjects, props.visible])
 
    const handleInputChnage = e => { // OnChnage Input setting values in values varable
         var { name, value } = e.target
@@ -63,12 +56,11 @@ const ContactFrom = (props) => {
    
     return ( 
       <>
-        {/* <Tooltip title="Add New">
-          <Button type="primary" shape="circle" icon={<PlusOutlined />} size="large" onClick={showModal} />
-        </Tooltip> */}
-        <Modal
-        title={props.currentId === 0 ? "Add New Contact": "Update Contact"}
-        visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        {/* <Button type="primary" shape="circle" size="large" onClick={showModal}>Show</Button> */}
+        <Modal key={props.currentId}
+        title={props.currentId === '' ? "Add New Contact": "Update Contact"}
+        visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}
+        footer={null} forceRender={true}>
         <Form>
           <Input name="fullName" placeholder="Full Name" value={values.fullName} onChange={handleInputChnage} />
           <br />
