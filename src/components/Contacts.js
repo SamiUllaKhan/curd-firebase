@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Layout, Row, Col, Skeleton, Card, Avatar, Tooltip, Button, Empty} from 'antd';
+import { Layout, Row, Col, Skeleton, Card, Avatar, Tooltip, Button, Empty, Table} from 'antd';
 import ContactFrom from './ContactFrom';
 import { EditOutlined, EllipsisOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import firebase from '../firebase';
@@ -13,9 +13,11 @@ const Contacts = () => {
     
     var loading = false;
     
+    
     var [contactObjects, setContactObjects] = useState({});
     var [currentId, setCurrentId] = useState('');
     var [visible, setVisible] = useState(false);
+
 
     useEffect(() => {
         db.ref('contacts').on('value', snapshot => {
@@ -44,6 +46,7 @@ const Contacts = () => {
         setVisible(false);
       db.ref(`contacts/${key}`).remove();
     }
+
     return ( 
         <>
         <Layout className="layout">
@@ -54,7 +57,11 @@ const Contacts = () => {
                     <Content>
                     <div style={{float: "right", padding: "20px 30px 0px 30px"}}>
                         <Tooltip title="Add New">
-                            <Button type="primary" shape="circle" icon={<PlusOutlined />} size="large" onClick={() =>{setCurrentId(''); setVisible(true);}} />
+                            <Button type="primary" shape="circle" icon={<PlusOutlined />} size="large" 
+                            onClick={() =>{
+                                setCurrentId(''); 
+                                setVisible(true); 
+                                }} />
                         </Tooltip>
                     </div>
                         <Row style={{ padding: 20, margin: "10px 30px 10px 30px", backgroundColor: '#fff', display: "inline-flex", borderRadius: 10 }}>

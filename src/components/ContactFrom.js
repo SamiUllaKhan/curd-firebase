@@ -19,6 +19,10 @@ const ContactFrom = (props) => {
     var [values, setValues] = useState(initialiFieldForm);
     const [isModalVisible, setIsModalVisible] = useState(false);
 
+    const showModal = () => {
+      setIsModalVisible(true);
+    };
+
     const handleOk = () => {
       setIsModalVisible(false);
     };
@@ -28,17 +32,19 @@ const ContactFrom = (props) => {
     };
     
     useEffect(() => {
-      setIsModalVisible(false);
-      setIsModalVisible(props.visible);
-      if(props.currentId === ''){
-        setValues({
-          ...initialiFieldForm
-        })
-      } else {
-        setValues({
-          ...props.contactObjects[props.currentId]
-        })
-      }
+      const loadModalAndData = async () => {
+        if(props.visible) showModal()
+        if(props.currentId === ''){
+          setValues({
+            ...initialiFieldForm
+          })
+        } else {
+          setValues({
+            ...props.contactObjects[props.currentId]
+          })
+        }
+      };
+      loadModalAndData();
     }, [props.currentId, props.contactObjects, props.visible])
 
    const handleInputChnage = e => { // OnChnage Input setting values in values varable
